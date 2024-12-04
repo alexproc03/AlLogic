@@ -1,0 +1,34 @@
+Program:
+  instructions*=Instruction
+;
+
+Instruction:
+  Circuit | Instance | Execution
+;
+
+Circuit:
+    'define' name=ID '(' inputs=INT ':' outputs=INT ')' '{'
+    declarations+=Declaration
+    nodes+=Node
+    connections+=Connection
+    '}';
+
+Declaration:
+    'declare' gate=ID ':' instance=ID;
+
+Node:
+    ('this' | instance=ID) '.' ('in' | 'out') '[' index=INT ']';
+
+Connection:
+    source=Node '->' target=Node;
+
+Instance:
+    'declare' circuit=ID ':' instance=ID;
+
+Execution:
+    instance=ID '[' values+=INT[','] ']';
+
+
+Comment:
+  /\/\/.*$/
+;
