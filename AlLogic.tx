@@ -3,30 +3,29 @@ Program:
 ;
 
 Instruction:
-  Circuit | Instance | Execution
+  Definition | Execution
 ;
 
-Circuit:
+Definition:
     'define' name=ID '(' inputs=INT ':' outputs=INT ')' '{'
-    declarations+=Declaration
-    nodes+=Node
+    inclusions+=Inclusion
     connections+=Connection
     '}';
+
+Inclusion:
+    'include' gate=ID ':' instance=ID;
 
 Declaration:
     'declare' gate=ID ':' instance=ID;
 
 Node:
-    ('this' | instance=ID) '.' ('in' | 'out') '[' index=INT ']';
+    (instance='this' | instance=ID) '.' ('in' | 'out') '[' index=INT ']';
 
 Connection:
     source=Node '->' target=Node;
 
-Instance:
-    'declare' circuit=ID ':' instance=ID;
-
 Execution:
-    instance=ID '[' values+=INT[','] ']';
+    circuit=ID '[' values+=INT[','] ']';
 
 
 Comment:
