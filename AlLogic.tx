@@ -3,31 +3,35 @@ Program:
 ;
 
 Instruction:
-  Circuit | Instance | Execution
+  Definition | Declaration | Execution | Comment
 ;
 
-Circuit:
-    'define' name=ID '(' inputs=INT ':' outputs=INT ')' '{'
-    declarations+=Declaration
-    nodes+=Node
-    connections+=Connection
-    '}';
+Definition:
+  'define' name=ID '(' inputs=INT ':' outputs=INT ')' '{'
+  inclusions+=Inclusion
+  connections+=Connection
+  '}'
+;
+
+Inclusion:
+  'include' gate=ID ':' identifier=ID
+;
 
 Declaration:
-    'declare' gate=ID ':' instance=ID;
+  'declare' gate=ID ':' identifier=ID
+;
 
 Node:
-    ('this' | instance=ID) '.' ('in' | 'out') '[' index=INT ']';
+  (instance='this' | instance=ID) '.' (side='in' | side='out') '[' index=INT ']'
+;
 
 Connection:
-    source=Node '->' target=Node;
-
-Instance:
-    'declare' circuit=ID ':' instance=ID;
+  source=Node '->' target=Node
+;
 
 Execution:
-    instance=ID '[' values+=INT[','] ']';
-
+  circuit=ID '[' values+=INT[','] ']' 
+;
 
 Comment:
   /\/\/.*$/
