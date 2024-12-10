@@ -1,3 +1,4 @@
+
 define XOR(2:1){
     include AND:and
     include AND:and1

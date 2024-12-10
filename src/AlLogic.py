@@ -220,13 +220,7 @@ class AlLogic:
                 circuit.update_inputs(values)
                 print(circuit)
 
-allogic_mm = metamodel_from_file('AlLogic.tx')
-alllogic_model = allogic_mm.model_from_file('adder.al')
+allogic_mm = metamodel_from_file('src/AlLogic.tx')
+alllogic_model = allogic_mm.model_from_file('sample_code/adder.al')
 logic = AlLogic()
 logic.interpret(alllogic_model)
-
-
-
-
-
-
