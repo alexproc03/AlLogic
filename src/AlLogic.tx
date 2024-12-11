@@ -3,8 +3,17 @@ Program:
 ;
 
 Instruction:
-  Definition | Declaration | Execution | Comment
+  Import | Definition | Declaration | Execution | Comment
 ;
+
+Import:
+  'import' path=FilePath
+;
+
+FilePath:
+   directory +=ID['/'] '.' extension=ID
+;
+
 
 Definition:
   'define' name=ID '(' inputs=INT ':' outputs=INT ')' '{'

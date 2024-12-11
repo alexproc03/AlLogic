@@ -1,24 +1,3 @@
-
-define XOR(2:1){
-    include AND:and
-    include AND:and1
-    include OR:or
-    include NOT:not
-    include NOT:not1
-
-    this.in[0] -> not.in[0]
-    this.in[1] -> not1.in[0]
-    this.in[0] -> and.in[0]
-    not1.out[0] -> and.in[1]
-    this.in[1] -> and1.in[0]
-    not.out[0] -> and1.in[1]
-
-    and.out[0] -> or.in[0]
-    and1.out[0] -> or.in[1]
-
-    or.out[0] -> this.out[0]
-}
-
 define HALFADD(2:2) {
     include XOR: xor
     include AND: and
@@ -55,7 +34,9 @@ define FULLADD(3:2) {
     halfadd1.out[1] -> this.out[1]
 }
 
-define EIGHTADD(16:9) {
+//bit 0: c in, input 1-8: first operand, input 9-16: second operand
+//output: 0 carry out, litte endian
+define EIGHTADD(17:9) {
     include FULLADD: bit0
     include FULLADD: bit1
     include FULLADD: bit2
@@ -65,29 +46,30 @@ define EIGHTADD(16:9) {
     include FULLADD: bit6
     include FULLADD: bit7
 
-    this.in[7] -> bit0.in[2]
-    this.in[15] -> bit0.in[1]
+    this.in[8] -> bit0.in[2]
+    this.in[16] -> bit0.in[1]
+    this.in[0] -> bit0.in[0]
 
-    this.in[6] -> bit1.in[2]
-    this.in[14] -> bit1.in[1]
+    this.in[7] -> bit1.in[2]
+    this.in[15] -> bit1.in[1]
 
-    this.in[5] -> bit2.in[2]
-    this.in[13] -> bit2.in[1]
+    this.in[6] -> bit2.in[2]
+    this.in[14] -> bit2.in[1]
 
-    this.in[4] -> bit3.in[2]
-    this.in[12] -> bit3.in[1]
+    this.in[5] -> bit3.in[2]
+    this.in[13] -> bit3.in[1]
 
-    this.in[3] -> bit4.in[2]
-    this.in[11] -> bit4.in[1]
+    this.in[4] -> bit4.in[2]
+    this.in[12] -> bit4.in[1]
 
-    this.in[2] -> bit5.in[2]
-    this.in[10] -> bit5.in[1]
+    this.in[3] -> bit5.in[2]
+    this.in[9] -> bit5.in[1]
     
-    this.in[1] -> bit6.in[2]
-    this.in[9] -> bit6.in[1]
+    this.in[2] -> bit6.in[2]
+    this.in[10] -> bit6.in[1]
 
-    this.in[0] -> bit7.in[2]
-    this.in[8] -> bit7.in[1]
+    this.in[1] -> bit7.in[2]
+    this.in[9] -> bit7.in[1]
 
     bit0.out[0] -> bit1.in[0]
     bit1.out[0] -> bit2.in[0]
@@ -108,6 +90,7 @@ define EIGHTADD(16:9) {
     bit0.out[1] -> this.out[8]
 }
 
-declare EIGHTADD: test
 
-test[1,1,1,1,1,1,1,0,   0,0,0,0,0,0,0,1]
+declare EIGHTADD: test
+test[0,            0,0,0,0,1,1,1,1,            0,0,0,0,1,0,0,0]
+
