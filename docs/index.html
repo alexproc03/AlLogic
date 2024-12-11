@@ -75,12 +75,42 @@
             padding: 0.2rem 0.4rem;
             border-radius: 5px;
         }
+        .About {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: #e8e8e8;
+            border-radius: 10px;
+            text-align: left;
+        }
+        .About h2 {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        .About p {
+            margin-bottom: 1rem;
+        }
+        .About code {
+            background-color: #f4f4f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>AlLogic </h1>
         <p>Sequential Logic Programming Language</p>
+
+        <div class="About">
+            <h2>Features</h2>
+            <ul>
+                <li>Basic constructs: only AND, OR, NOT, XOR, etc…
+                <li>Define, declare, and invoke complex circuits using these
+                <li>Defined gates can be used to define subsequent gates, allowing for abstraction
+                <li>Declared circuits are evaluated using a graph traversal, rather than a boolean expression
+                <li>Import statements allow multiple files worth of definitions for better organization</li>
+            </ul>
+        </div>
         
         <img src="image1.jpg" alt="Project 1">
         <img src="image2.jpg" alt="Project 2">
